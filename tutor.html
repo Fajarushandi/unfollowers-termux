@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unfollower IG by FR (Termux Edition)</title>
+<style>
+  body {
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  header {
+    text-align: center;
+    padding: 30px 10px;
+  }
+  header h1 {
+    color: #00d4ff;
+    font-size: 28px;
+    text-shadow: 0 0 10px #00d4ff;
+  }
+  header p {
+    color: #ccc;
+  }
+  .container {
+    max-width: 820px;
+    margin: auto;
+    padding: 10px 18px 60px;
+  }
+  pre {
+    background: #161b22;
+    padding: 10px 14px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-family: monospace;
+    color: #00ffcc;
+    position: relative;
+  }
+  pre button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #00d4ff;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  a {
+    color: #00d4ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  h2 {
+    color: #00d4ff;
+    border-left: 4px solid #00d4ff;
+    padding-left: 8px;
+  }
+  .note {
+    background: #161b22;
+    border-left: 4px solid #00d4ff;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+  footer {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    padding: 25px 0;
+    border-top: 1px solid #222;
+  }
+</style>
+<script>
+function copyCode(el) {
+  const code = el.parentElement.innerText;
+  navigator.clipboard.writeText(code);
+  el.innerText = "Copied!";
+  setTimeout(() => el.innerText = "Copy", 1500);
+}
+</script>
+</head>
+<body>
+<header>
+  <h1>🌀 UNFOLLOWER IG by FR (Termux Edition)</h1>
+  <p>Tool buat cek siapa yang nggak follow balik di Instagram — simple, aman, dan 100% offline 🔥</p>
+</header>
+
+<div class="container">
+  <h2>Step 1 — Install & Setup Termux</h2>
+  <pre><button onclick="copyCode(this)">Copy</button>pkg update && pkg upgrade -y
+pkg install nodejs git unzip -y
+termux-setup-storage</pre>
+  <div class="note">Tekan “Izinkan” kalau Termux minta akses penyimpanan.</div>
+
+  <h2>Step 2 — Buat Folder Project</h2>
+  <pre><button onclick="copyCode(this)">Copy</button>mkdir -p ~/unfollower-fr
+cd ~/unfollower-fr</pre>
+
+  <h2>Step 3 — Inisialisasi Node.js Project</h2>
+  <pre><button onclick="copyCode(this)">Copy</button>npm init -y
+npm install node-fetch@2.6.7</pre>
+
+  <h2>Step 4 — Buat File <code>setup-cookie.js</code></h2>
+  <pre><button onclick="copyCode(this)">Copy</button>curl -s https://pastebin.com/raw/k6E9GdUA -o setup-cookie.js</pre>
+  <p>Atau buka manual 👉 <a href="https://pastebin.com/raw/k6E9GdUA" target="_blank">https://pastebin.com/raw/k6E9GdUA</a></p>
+
+  <h2>Step 5 — Buat File <code>unfollower.js</code></h2>
+  <pre><button onclick="copyCode(this)">Copy</button>curl -s https://pastebin.com/raw/H3ipSJ3F -o unfollower.js</pre>
+  <p>Atau buka manual 👉 <a href="https://pastebin.com/H3ipSJ3F" target="_blank">https://pastebin.com/H3ipSJ3F</a></p>
+
+  <h2>Step 6 — Jalankan Setup Cookie</h2>
+  <pre><button onclick="copyCode(this)">Copy</button>node setup-cookie.js</pre>
+  <p>Ambil cookie Instagram kamu lewat Kiwi Browser:</p>
+  <ol>
+    <li>Buka <b>Kiwi Browser</b> dan login ke Instagram.</li>
+    <li>Pasang extension <b>EditThisCookie</b> 👉 <a href="https://chromewebstore.google.com/detail/ojfebgpkimhlhcblbalbfjblapadhbol" target="_blank">link resmi Chrome Web Store</a>.</li>
+    <li>Tutup semua tab kecuali Instagram.</li>
+    <li>Tekan titik tiga kanan atas → scroll ke bawah → klik <b>EditThisCookie</b>.</li>
+    <li>Salin nilai <b>sessionid</b> & <b>ds_user_id</b>.</li>
+    <li>Paste ke Termux saat diminta.</li>
+  </ol>
+
+  <h2>Step 7 — Jalankan Tool</h2>
+  <pre><button onclick="copyCode(this)">Copy</button>node unfollower.js</pre>
+  <p>📂 Hasil otomatis tersimpan di:</p>
+  <pre><button onclick="copyCode(this)">Copy</button>~/unfollower-fr/unfollowers.txt
+~/unfollower-fr/unfollowers.csv
+/sdcard/Download/unfollowers.csv</pre>
+
+  <h2>Step 8 — (Opsional) Biar Cepat Tinggal Ketik <code>unfoll</code></h2>
+  <pre><button onclick="copyCode(this)">Copy</button>echo "alias unfoll='clear && cd ~/unfollower-fr && node unfollower.js'" >> ~/.bashrc
+source ~/.bashrc</pre>
+
+  <p>Setelah itu cukup ketik:</p>
+  <pre><button onclick="copyCode(this)">Copy</button>unfoll</pre>
+
+  <h2>⚠️ Catatan Penting</h2>
+  <ul>
+    <li>Tool ini hanya <b>membaca data akun kamu</b>, tidak login langsung, jadi aman dari banned.</li>
+    <li>Cookie <code>(sessionid & ds_user_id)</code> kadaluarsa ±30 hari, ulangi <code>node setup-cookie.js</code> kalau error.</li>
+    <li>Jangan pernah bagikan file <code>config.json</code> ke siapa pun.</li>
+  </ul>
+
+  <footer>
+    💾 <b>Author:</b> FR (Fajar Rushandi) <br>
+    🧠 <b>Helper:</b> ChatGPT (GPT-5) <br>
+    📍 <b>Platform:</b> Termux Android
+  </footer>
+</div>
+</body>
+</html>
