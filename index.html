@@ -1,259 +1,241 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unfollower IG by FR (Termux Edition)</title>
-<link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
-<style>
-  :root {
-    --bg: #0d1117;
-    --text: #e6edf3;
-    --card: #161b22;
-    --accent: #00d4ff;
-    --shadow: rgba(0,212,255,0.3);
-  }
-  [data-theme='light'] {
-    --bg: #f5f7fa;
-    --text: #111;
-    --card: #fff;
-    --accent: #007bff;
-    --shadow: rgba(0,123,255,0.25);
-  }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Segoe UI", system-ui, sans-serif;
-    margin: 0;
-    line-height: 1.6;
-    transition: background .3s ease, color .3s ease;
-  }
-  header {
-    text-align: center;
-    padding: 40px 10px;
-    background: linear-gradient(135deg, var(--accent), #007bff);
-    color: white;
-    box-shadow: 0 0 25px var(--shadow);
-    position: relative;
-  }
-  header h1 {
-    font-size: 28px;
-    animation: glow 3s infinite alternate;
-  }
-  @keyframes glow {
-    from { text-shadow: 0 0 10px var(--accent); }
-    to { text-shadow: 0 0 25px var(--accent); }
-  }
-  #themeToggle {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  }
-  .container {
-    max-width: 850px;
-    margin: auto;
-    padding: 20px;
-  }
-  h2 {
-    color: var(--accent);
-    border-left: 4px solid var(--accent);
-    padding-left: 8px;
-  }
-  pre {
-    background: var(--card);
-    color: var(--accent);
-    padding: 12px 14px;
-    border-radius: 10px;
-    overflow-x: auto;
-    position: relative;
-  }
-  pre button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: var(--accent);
-    color: #000;
-    border: none;
-    border-radius: 6px;
-    padding: 4px 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-  }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  .note {
-    background: var(--card);
-    border-left: 4px solid var(--accent);
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-size: 15px;
-  }
-  footer {
-    text-align: center;
-    color: #777;
-    font-size: 14px;
-    padding: 25px 0;
-    border-top: 1px solid #222;
-  }
-  .toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--accent);
-    color: #000;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-weight: 600;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .4s ease;
-    z-index: 9999;
-  }
-  #topBtn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background: var(--accent);
-    color: #000;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-weight: 900;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 0 20px var(--shadow);
-    display: none;
-    z-index: 9998;
-  }
-  details {
-    background: var(--card);
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    cursor: pointer;
-    transition: all .2s ease;
-  }
-  summary {
-    font-weight: bold;
-    color: var(--accent);
-    list-style: none;
-  }
-  details[open] summary::after {
-    content: "▲";
-    float: right;
-  }
-  summary::after {
-    content: "▼";
-    float: right;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unfollower IG by FR (Termux Edition)</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --text: #f0f6fc;
+      --accent: #00d4ff;
+      --code-bg: #111;
+      --secondary: #aaa;
+    }
+    [data-theme='light'] {
+      --bg: #f5f7fa;
+      --text: #0d1117;
+      --accent: #007bff;
+      --code-bg: #e6e9ef;
+      --secondary: #555;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      text-align: center;
+      padding: 30px 15px 20px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px var(--accent);
+    }
+    h1 {
+      color: var(--accent);
+      font-size: 1.8rem;
+      margin-bottom: 0;
+    }
+    h2 {
+      border-left: 4px solid var(--accent);
+      padding-left: 10px;
+      margin-top: 25px;
+      color: var(--accent);
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .code-block {
+      position: relative;
+      background: var(--code-bg);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      overflow-x: auto;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .copy-btn:hover {
+      background: #00bfe0;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 20px;
+      color: var(--secondary);
+    }
+    .faq-item {
+      background: var(--code-bg);
+      border-radius: 8px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 10px 14px;
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--accent);
+    }
+    .faq-a {
+      padding: 10px 14px;
+      display: none;
+      color: var(--text);
+    }
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+      font-weight: 600;
+    }
+    #themeToggle {
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #topBtn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--accent);
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <button id="themeToggle">🌙</button>
+  <header>
+    <h1>🌀 UNFOLLOWER IG by FR</h1>
+    <div>(Termux Edition)</div>
+    <p>Tool buat cek siapa yang nggak follow balik di Instagram — simple, aman, dan 100% offline 🔥</p>
+  </header>
 
-<header>
-  <button id="themeToggle">☀️</button>
-  <h1>🌀 UNFOLLOWER IG by FR (Termux Edition)</h1>
-  <p>Tool buat cek siapa yang nggak follow balik di Instagram — simple, aman, dan 100% offline 🔥</p>
-</header>
+  <div class="container">
 
-<div class="container">
-  <h2>Step 1 — Install & Setup Termux</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>pkg update && pkg upgrade -y
+    <h2>Step 1 — Install & Setup Termux</h2>
+    <div class="code-block"><pre><code>pkg update && pkg upgrade -y
 pkg install nodejs git unzip -y
-termux-setup-storage</code></pre>
-  <div class="note">Tekan “Izinkan” kalau Termux minta akses penyimpanan.</div>
+termux-setup-storage</code></pre><button class="copy-btn">Copy</button></div>
+    <p>Tekan “Izinkan” kalau Termux minta akses penyimpanan.</p>
 
-  <h2>Step 2 — Buat Folder Project</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>mkdir -p ~/unfollower-fr
-cd ~/unfollower-fr</code></pre>
+    <h2>Step 2 — Buat Folder Project</h2>
+    <div class="code-block"><pre><code>mkdir -p ~/unfollower-fr
+cd ~/unfollower-fr</code></pre><button class="copy-btn">Copy</button></div>
 
-  <h2>Step 3 — Inisialisasi Project</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>npm init -y
-npm install node-fetch@2.6.7</code></pre>
+    <h2>Step 3 — Inisialisasi Project</h2>
+    <div class="code-block"><pre><code>npm init -y
+npm install node-fetch@2.6.7</code></pre><button class="copy-btn">Copy</button></div>
+    <p>Langkah ini bakal bikin file <b>package.json</b> otomatis.</p>
 
-  <h2>Step 4 — Buat File setup-cookie.js</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>curl -s https://pastebin.com/raw/k6E9GdUA -o setup-cookie.js</code></pre>
+    <h2>Step 4 — Buat File setup-cookie.js</h2>
+    <div class="code-block"><pre><code>curl -L https://pastebin.com/raw/k6E9GdUA -o setup-cookie.js</code></pre><button class="copy-btn">Copy</button></div>
+    <p>Buka Kiwi Browser → login ke <b>instagram.com</b> → buka <b>EditThisCookie</b> → salin value <b>sessionid</b> & <b>ds_user_id</b>.</p>
 
-  <h2>Step 5 — Buat File unfollower.js</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>curl -s https://pastebin.com/raw/H3ipSJ3F -o unfollower.js</code></pre>
+    <h2>Step 5 — Buat File unfollower.js</h2>
+    <div class="code-block"><pre><code>curl -L https://pastebin.com/raw/H3ipSJ3F -o unfollower.js</code></pre><button class="copy-btn">Copy</button></div>
 
-  <h2>Step 6 — Jalankan Setup Cookie</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>node setup-cookie.js</code></pre>
+    <h2>Step 6 — Jalankan Setup</h2>
+    <div class="code-block"><pre><code>node setup-cookie.js</code></pre><button class="copy-btn">Copy</button></div>
+    <p>Masukkan sessionid & ds_user_id sesuai instruksi.</p>
 
-  <h2>Step 7 — Jalankan Tool</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>node unfollower.js</code></pre>
+    <h2>Step 7 — Jalankan Tool</h2>
+    <div class="code-block"><pre><code>node unfollower.js</code></pre><button class="copy-btn">Copy</button></div>
+    <p>Hasil akan tersimpan otomatis ke folder <b>Download</b>.</p>
 
-  <h2>Step 8 — Shortcut Command (Opsional)</h2>
-  <pre><button onclick="copyCode(this)">Copy</button><code>echo "alias unfoll='clear && cd ~/unfollower-fr && node unfollower.js'" >> ~/.bashrc
-source ~/.bashrc</code></pre>
+    <h2>Step 8 — Buat Alias (Opsional)</h2>
+    <div class="code-block"><pre><code>echo "alias unfoll='cd ~/unfollower-fr && node unfollower.js'" >> ~/.bashrc
+source ~/.bashrc</code></pre><button class="copy-btn">Copy</button></div>
+    <p>Selanjutnya cukup ketik <b>unfoll</b> aja buat jalanin tool-nya 🚀</p>
 
-  <h2>❓ FAQ (Pertanyaan Umum)</h2>
+    <h2>FAQ</h2>
+    <div class="faq-item"><div class="faq-q">❓ 100% offline itu maksudnya apa?</div><div class="faq-a">Script ini gak kirim data kamu ke mana pun, semua berjalan di HP kamu sendiri. Internet cuma dipakai buat akses server Instagram resmi.</div></div>
+    <div class="faq-item"><div class="faq-q">❓ Kenapa cookie harus diambil manual?</div><div class="faq-a">Supaya login kamu aman. Cookie langsung dari akun kamu sendiri, bukan lewat server pihak ketiga.</div></div>
+    <div class="faq-item"><div class="faq-q">❓ Error 403 atau 429?</div><div class="faq-a">Biasanya karena terlalu sering fetch data dari Instagram. Coba tunggu beberapa menit sebelum jalankan ulang.</div></div>
 
-  <details>
-    <summary>Kenapa tool ini aman dipakai?</summary>
-    <p>Karena tool ini cuma ambil data via cookie resmi Instagram kamu sendiri, tanpa login ke server lain atau pihak ketiga. Semua proses berjalan lokal di HP kamu lewat Termux.</p>
-  </details>
+  </div>
 
-  <details>
-    <summary>Kenapa cookie harus diambil manual?</summary>
-    <p>Itu cara paling aman biar akun kamu gak keambil pihak lain. Ambil manual via Kiwi Browser pake extension EditThisCookie biar cookie-nya valid & resmi dari web IG kamu sendiri.</p>
-  </details>
+  <footer>By FR (Fajar Rushandi) • Powered by ChatGPT GPT-5 😎</footer>
+  <button id="topBtn">↑</button>
 
-  <details>
-    <summary>Apa itu sessionid dan ds_user_id?</summary>
-    <p>Keduanya adalah identitas akun kamu di browser. Sessionid = login token, ds_user_id = ID akun kamu. Tool ini cuma butuh dua itu buat akses data followers/following kamu.</p>
-  </details>
+  <div class="toast" id="toast">Disalin!</div>
 
-  <details>
-    <summary>Kenapa muncul error 403 / 429?</summary>
-    <p>Itu artinya Instagram lagi ngebatesin permintaan (rate limit). Tunggu 1–2 menit lalu jalankan ulang. Tool ini udah otomatis ada delay biar gak ke-ban IP.</p>
-  </details>
+  <script>
+    // Copy fix
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.previousElementSibling.innerText;
+        navigator.clipboard.writeText(code);
+        const toast = document.getElementById('toast');
+        toast.style.opacity = 1;
+        setTimeout(() => toast.style.opacity = 0, 2000);
+      });
+    });
 
-  <details>
-    <summary>Berapa lama cookie aktif?</summary>
-    <p>Biasanya 30 hari. Kalau tool tiba-tiba gagal ambil data, ulangi aja langkah <code>node setup-cookie.js</code> buat update cookie baru.</p>
-  </details>
+    // Toggle dark/light
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      const theme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', theme);
+      toggle.textContent = theme === 'light' ? '☀️' : '🌙';
+    });
 
-  <footer>
-    💾 Author: FR (Fajar Rushandi) <br>
-    🧠 Helper: ChatGPT (GPT-5) <br>
-    📍 Platform: Termux Android
-  </footer>
-</div>
+    // FAQ toggle
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const a = q.nextElementSibling;
+        a.style.display = a.style.display === 'block' ? 'none' : 'block';
+      });
+    });
 
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<div id="toast" class="toast">Copied!</div>
-
-<script>
-function copyCode(el) {
-  const code = el.parentElement.querySelector('code').innerText.trim();
-  navigator.clipboard.writeText(code);
-  const toast = document.getElementById('toast');
-  toast.style.opacity = '1';
-  setTimeout(()=>toast.style.opacity='0',1200);
-}
-window.addEventListener('scroll', ()=>{
-  document.getElementById('topBtn').style.display = window.scrollY > 400 ? 'block' : 'none';
-});
-const toggle = document.getElementById('themeToggle');
-toggle.addEventListener('click', ()=>{
-  const theme = document.body.getAttribute('data-theme');
-  document.body.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
-  toggle.textContent = theme === 'light' ? '☀️' : '🌙';
-});
-document.body.setAttribute('data-theme','dark');
-</script>
-
+    // Scroll top button
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', () => {
+      topBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+    topBtn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
 </body>
 </html>
